@@ -1,12 +1,13 @@
-const {createServer} = require('node:http'); // Importiere createServer aus dem http-Modul
-const host = process.env.HOST || '127.0.0.1';
-const port = process.env.PORT || 3000;
+const express = require('express');
+const app = express();
+const port = 3000;
 
-const server = createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello World');
+app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.send('Hello, World!');
 });
-server.listen(port, host, () => {
-    console.log(`Server running at http://${host}:${port}/`);
+
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
 });
